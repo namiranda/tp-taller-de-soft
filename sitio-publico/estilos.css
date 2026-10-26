@@ -846,3 +846,239 @@ footer {
         padding: 24px;
     }
 }
+
+/* ========================================
+   IMAGEN DEL CLUB
+======================================== */
+
+.seccion-imagen-club {
+    width: 100%;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.seccion-imagen-club h2 {
+    margin-bottom: 15px;
+}
+
+.seccion-imagen-club p {
+    margin-bottom: 25px;
+}
+
+.imagen-club {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 350px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 16px;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+    .seccion-imagen-club {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .imagen-club {
+        height: 220px;
+    }
+}
+
+/* ========================================
+   HISTORIA Y UBICACIÓN DEL CLUB
+======================================== */
+
+.seccion-informativa {
+    width: 100%;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.seccion-informativa h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.historia-club,
+.ubicacion-club {
+    background: #192a40;
+    border: 1px solid #29445a;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.historia-club h3,
+.ubicacion-club h3 {
+    color: #00d4aa;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.historia-club p,
+.ubicacion-club p {
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+/* ========================================
+   DATOS DESTACADOS DEL CLUB
+======================================== */
+
+.datos-club {
+    width: 100%;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 40px;
+    box-sizing: border-box;
+
+    background: linear-gradient(135deg, #14283d, #0c1d2e);
+    border: 1px solid #00d4aa;
+    border-radius: 20px;
+}
+
+.datos-club h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.datos-club p {
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.lista-datos-club {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.lista-datos-club li {
+    color: #cbd5e1;
+    padding: 15px 0;
+    border-bottom: 1px solid #29445a;
+    line-height: 1.6;
+}
+
+.lista-datos-club li strong {
+    color: #00d4aa;
+}
+
+/* ========================================
+   ADAPTACIÓN PARA CELULARES
+======================================== */
+
+@media (max-width: 768px) {
+
+    .seccion-informativa {
+        margin: 40px auto;
+        padding: 0 15px;
+    }
+
+    .seccion-informativa h2,
+    .datos-club h2 {
+        font-size: 1.6rem;
+    }
+
+    .historia-club,
+    .ubicacion-club {
+        padding: 22px;
+    }
+
+    .datos-club {
+        margin: 40px auto;
+        padding: 25px 20px;
+    }
+}
+
+/* ========================================
+   SELECTOR CSS POR ATRIBUTO
+======================================== */
+
+
+/* ========================================
+   AJUSTES FINALES - SOCIOCLUB
+======================================== */
+
+/* Evitar desbordamientos horizontales */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Imágenes adaptables */
+.imagen-club {
+    height: 350px;
+    object-fit: cover;
+}
+
+/* Imagen principal del club */
+.imagen-club {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* Enlace de navegación activo */
+nav a[aria-current="page"] {
+    color: #00d4aa;
+    border-bottom: 2px solid #00d4aa;
+    font-weight: 700;
+}
+
+/* Mejorar accesibilidad al navegar con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid #00d4aa;
+    outline-offset: 3px;
+}
+
+/* Evitar que el contenido se desborde */
+main,
+section,
+article,
+aside {
+    min-width: 0;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+
+    .imagen-club {
+        height: 220px;
+    }
+
+    .grilla-beneficios,
+    .grilla-actividades {
+        grid-template-columns: 1fr;
+    }
+
+    .seccion-informativa,
+    .seccion-imagen-club,
+    .datos-club {
+        max-width: 100%;
+    }
+}
