@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocioClub | Actividades</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>SocioClub</h1>
+        <p>Encontrá tu próxima actividad favorita</p>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="actividades.html" aria-current="page">Actividades</a>
+            <a href="preinscripcion.html">Preinscripción</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Explorá nuestras actividades</h2>
+            <p>
+                Tenemos propuestas deportivas y recreativas para
+                diferentes edades. Encontrá la actividad ideal para vos.
+            </p>
+        </section>
+
+        <section>
+            <h2>Buscá tu actividad</h2>
+
+            <div class="filtros">
+                <div class="campo-filtro">
+                    <label for="filtroDisciplina">Disciplina</label>
+
+                    <select id="filtroDisciplina">
+                        <option value="">Todas las disciplinas</option>
+                        <option value="Fútbol">Fútbol</option>
+                        <option value="Vóley">Vóley</option>
+                        <option value="Básquet">Básquet</option>
+                        <option value="Natación">Natación</option>
+                        <option value="Patín">Patín</option>
+                        <option value="Ajedrez">Ajedrez</option>
+                        <option value="Fitness">Fitness</option>
+                        <option value="Bienestar">Bienestar</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtroEdad">Edad</label>
+
+                    <input
+                        type="number"
+                        id="filtroEdad"
+                        min="0"
+                        max="120"
+                        placeholder="Ingresá tu edad"
+                    >
+                </div>
+            </div>
+
+            <p id="cantidadResultados" aria-live="polite"></p>
+
+            <div id="listaActividades" class="grilla-actividades">
+                <!-- JavaScript mostrará las actividades aquí -->
+            </div>
+
+            <p id="mensajeSinResultados" hidden>
+                No encontramos actividades para los filtros seleccionados.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SocioClub. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

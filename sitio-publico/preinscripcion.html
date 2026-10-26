@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocioClub | Preinscripción</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>SocioClub</h1>
+        <p>Tu próximo desafío comienza acá</p>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="preinscripcion.html" aria-current="page">Preinscripción</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Sumate a SocioClub</h2>
+            <p>
+                Completá el formulario para solicitar tu preinscripción
+                a una de nuestras actividades deportivas.
+            </p>
+        </section>
+
+        <section class="seccion-formulario">
+
+            <h2>Formulario de preinscripción</h2>
+
+            <p>
+                Completá tus datos personales y seleccioná
+                la actividad que te gustaría realizar.
+            </p>
+
+            <form id="formularioPreinscripcion" novalidate>
+
+                <!-- NOMBRE -->
+                <div class="campo-formulario">
+                    <label for="nombre">Nombre *</label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        placeholder="Ingresá tu nombre"
+                        autocomplete="given-name"
+                        required
+                    >
+
+                    <span class="mensaje-error" id="errorNombre"></span>
+                </div>
+
+                <!-- APELLIDO -->
+                <div class="campo-formulario">
+                    <label for="apellido">Apellido *</label>
+
+                    <input
+                        type="text"
+                        id="apellido"
+                        name="apellido"
+                        placeholder="Ingresá tu apellido"
+                        autocomplete="family-name"
+                        required
+                    >
+
+                    <span class="mensaje-error" id="errorApellido"></span>
+                </div>
+
+                <!-- DNI -->
+                <div class="campo-formulario">
+                    <label for="dni">DNI *</label>
+
+                    <input
+                        type="text"
+                        id="dni"
+                        name="dni"
+                        placeholder="Ejemplo: 40123456"
+                        inputmode="numeric"
+                        maxlength="8"
+                        required
+                    >
+
+                    <span class="mensaje-error" id="errorDni"></span>
+                </div>
+
+                <!-- FECHA DE NACIMIENTO -->
+                <div class="campo-formulario">
+                    <label for="fechaNacimiento">
+                        Fecha de nacimiento *
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fechaNacimiento"
+                        name="fechaNacimiento"
+                        required
+                    >
+
+                    <span
+                        class="mensaje-error"
+                        id="errorFechaNacimiento"
+                    ></span>
+                </div>
+
+                <!-- CORREO -->
+                <div class="campo-formulario">
+                    <label for="email">Correo electrónico *</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ejemplo@correo.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <span class="mensaje-error" id="errorEmail"></span>
+                </div>
+
+                <!-- TELÉFONO -->
+                <div class="campo-formulario">
+                    <label for="telefono">Teléfono *</label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        name="telefono"
+                        placeholder="Ejemplo: 3511234567"
+                        autocomplete="tel"
+                        required
+                    >
+
+                    <span class="mensaje-error" id="errorTelefono"></span>
+                </div>
+
+                <!-- ACTIVIDAD -->
+                <div class="campo-formulario">
+                    <label for="actividad">Actividad deportiva *</label>
+
+                    <select id="actividad" name="actividad" required>
+                        <option value="">
+                            Seleccioná una actividad
+                        </option>
+
+                        <option value="Fútbol infantil">
+                            Fútbol infantil
+                        </option>
+
+                        <option value="Vóley mixto">
+                            Vóley mixto
+                        </option>
+
+                        <option value="Básquet juvenil">
+                            Básquet juvenil
+                        </option>
+
+                        <option value="Natación">
+                            Natación
+                        </option>
+
+                        <option value="Patín artístico">
+                            Patín artístico
+                        </option>
+
+                        <option value="Ajedrez">
+                            Ajedrez
+                        </option>
+
+                        <option value="Funcional adultos">
+                            Funcional adultos
+                        </option>
+
+                        <option value="Yoga">
+                            Yoga
+                        </option>
+                    </select>
+
+                    <span class="mensaje-error" id="errorActividad"></span>
+                </div>
+
+                <!-- INFORMACIÓN -->
+                <div class="aviso-formulario">
+                    <p>
+                        La preinscripción es una solicitud inicial.
+                        La confirmación de la inscripción dependerá
+                        de la disponibilidad y las condiciones del club.
+                    </p>
+                </div>
+
+                <!-- BOTÓN -->
+                <button type="submit" class="boton-enviar">
+                    Enviar preinscripción
+                </button>
+
+                <!-- RESULTADO -->
+                <div
+                    id="mensajeFormulario"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            &copy; 2026 SocioClub.
+            Todos los derechos reservados.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
