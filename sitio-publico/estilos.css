@@ -791,3 +791,58 @@ footer {
         gap: 18px;
     }
 }
+
+/* ========================================
+   PÁGINA DE INICIO - TARJETAS
+======================================== */
+
+.grilla-beneficios {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.grilla-beneficios article {
+    background: linear-gradient(145deg, #192a40, #142236);
+    border: 1px solid #30445d;
+    border-radius: 18px;
+    padding: 30px;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.grilla-beneficios article:hover {
+    transform: translateY(-6px);
+    border-color: #00d4aa;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.grilla-beneficios h3 {
+    color: #ffffff;
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.grilla-beneficios p {
+    color: #b8c8d9;
+    line-height: 1.7;
+}
+
+/* TABLETS */
+@media (max-width: 900px) {
+    .grilla-beneficios {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* CELULARES */
+@media (max-width: 600px) {
+    .grilla-beneficios {
+        grid-template-columns: 1fr;
+    }
+
+    .grilla-beneficios article {
+        padding: 24px;
+    }
+}

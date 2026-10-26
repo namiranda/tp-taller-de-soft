@@ -76,7 +76,7 @@ function mostrarActividades(lista) {
         cuota.textContent = `${formatoPesos.format(actividad.cuotaMensual)} / mes`;
 
         const enlace = document.createElement("a");
-        enlace.href = "preinscripcion.html";
+        enlace.href = "preinscripcion.html?actividad=" + encodeURIComponent(actividad.nombre);
         enlace.textContent = "Preinscribirme";
 
         tarjeta.append(
@@ -289,6 +289,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Evita errores en las páginas que no tienen formulario
     if (!formulario) return;
+    // Quitar los mensajes de error al corregir los campos
+    formulario.querySelectorAll("input, select").forEach((campo) => {
+        const evento = campo.tagName === "SELECT" ? "change" : "input";
+
+        campo.addEventListener(evento, () => {
+            const mensajeError = campo.parentElement.querySelector(".mensaje-error");
+
+            if (mensajeError) {
+                mensajeError.textContent = "";
+            }
+
+            campo.classList.remove("input-error");
+            campo.setAttribute("aria-invalid", "false");
+        });
+    });
+    // Obtener la actividad seleccionada desde la página de actividades
+    const parametros = new URLSearchParams(window.location.search);
+    const actividadSeleccionada = parametros.get("actividad");
+
+    if (actividadSeleccionada) {
+        const selectorActividad = document.getElementById("actividad");
+
+        const actividadExiste = actividades.some(
+            (actividad) => actividad.nombre === actividadSeleccionada
+        );
+
+        if (actividadExiste) {
+            selectorActividad.value = actividadSeleccionada;
+        }
+    }
 
     formulario.addEventListener("submit", (evento) => {
         // Evitar que se recargue la página

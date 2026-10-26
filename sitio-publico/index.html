@@ -1,63 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SocioClub | Inicio</title>
+
     <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
 
+    <!-- ENCABEZADO -->
     <header>
         <h1>SocioClub</h1>
+
         <p>Tu espacio para el deporte y la comunidad</p>
 
-        <nav>
-            <a href="index.html">Inicio</a>
+        <!-- MENÚ DE NAVEGACIÓN -->
+        <nav aria-label="Navegación principal">
+            <a href="index.html" aria-current="page">Inicio</a>
             <a href="actividades.html">Actividades</a>
             <a href="preinscripcion.html">Preinscripción</a>
         </nav>
     </header>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <main>
-        <section>
+
+        <!-- BIENVENIDA -->
+        <section class="seccion-bienvenida">
+
             <h2>¡Bienvenidos a SocioClub!</h2>
+
             <p>
                 Somos un club deportivo que ofrece actividades
                 para todas las edades.
             </p>
+
             <p>
                 Conocé nuestras propuestas, elegí tu actividad
                 favorita y comenzá a formar parte de nuestra comunidad.
             </p>
 
-            <a href="actividades.html">Ver actividades</a>
+            <a href="actividades.html" class="boton-principal">
+                Ver actividades
+            </a>
+
         </section>
 
-        <section>
+        <!-- BENEFICIOS -->
+        <section class="seccion-beneficios">
+
             <h2>¿Qué ofrecemos?</h2>
 
-            <article>
-                <h3>Deportes</h3>
-                <p>Fútbol, vóley, básquet, natación y mucho más.</p>
-            </article>
+            <div class="grilla-beneficios">
 
-            <article>
-                <h3>Actividades para todas las edades</h3>
-                <p>Propuestas para niños, adolescentes y adultos.</p>
-            </article>
+                <!-- TARJETA 1 -->
+                <article>
+                    <h3>Deportes</h3>
 
-            <article>
-                <h3>Inscripciones</h3>
-                <p>Consultá nuestras actividades y realizá tu preinscripción.</p>
-            </article>
+                    <p>
+                        Fútbol, vóley, básquet, natación
+                        y mucho más.
+                    </p>
+                </article>
+
+                <!-- TARJETA 2 -->
+                <article>
+                    <h3>Actividades para todas las edades</h3>
+
+                    <p>
+                        Propuestas para niños,
+                        adolescentes y adultos.
+                    </p>
+                </article>
+
+                <!-- TARJETA 3 -->
+                <article>
+                    <h3>Inscripciones</h3>
+
+                    <p>
+                        Consultá nuestras actividades
+                        y realizá tu preinscripción.
+                    </p>
+                </article>
+
+            </div>
+
         </section>
+
     </main>
 
+    <!-- PIE DE PÁGINA -->
     <footer>
-        <p>&copy; 2026 SocioClub. Todos los derechos reservados.</p>
+        <p>
+            &copy; 2026 SocioClub.
+            Todos los derechos reservados.
+        </p>
     </footer>
 
     <script src="script.js"></script>
+
 </body>
+
 </html>
