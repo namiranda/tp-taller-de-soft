@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar actividad · SocioClub</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+<header th:replace="~{fragmentos/layout :: encabezado}"></header>
+
+<main>
+    <section class="panel">
+        <h2>Editar actividad</h2>
+
+        <form class="formulario-actividad" th:action="@{/actividades/{id}/editar(id=${actividad.id})}"
+              th:object="${actividad}" method="post">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" th:field="*{nombre}" maxlength="100" required>
+
+            <label for="disciplina">Disciplina</label>
+            <input id="disciplina" type="text" th:field="*{disciplina}" maxlength="100" required>
+
+            <label for="profesor">Profesor/a</label>
+            <input id="profesor" type="text" th:field="*{profesor}" maxlength="100" required>
+
+            <label for="dias">Días</label>
+            <input id="dias" type="text" th:field="*{dias}" maxlength="100" required>
+
+            <label for="horario">Horario</label>
+            <input id="horario" type="time" th:field="*{horario}" required>
+
+            <label for="edadMinima">Edad mínima</label>
+            <input id="edadMinima" type="number" th:field="*{edadMinima}" min="0" required>
+
+            <label for="edadMaxima">Edad máxima</label>
+            <input id="edadMaxima" type="number" th:field="*{edadMaxima}" min="0" required>
+
+            <label for="cupoMaximo">Cupo máximo</label>
+            <input id="cupoMaximo" type="number" th:field="*{cupoMaximo}" min="1" required>
+
+            <label for="cuotaMensual">Cuota mensual</label>
+            <input id="cuotaMensual" type="number" th:field="*{cuotaMensual}" min="0" step="0.01" required>
+
+            <div class="acciones-formulario">
+                <button class="boton" type="submit">Guardar cambios</button>
+                <a class="boton boton-secundario" th:href="@{/actividades}">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: pie}"></footer>
+
+</body>
+</html>

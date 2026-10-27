@@ -72,3 +72,57 @@ th {
     text-align: center;
     color: #666;
 }
+
+.acciones {
+    white-space: nowrap;
+}
+
+.boton {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 4px;
+    background: #087f6b;
+    color: #fff;
+    font: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.boton-secundario {
+    background: #5f6b76;
+}
+
+.formulario-actividad {
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) minmax(200px, 2fr);
+    gap: 12px;
+    max-width: 640px;
+    align-items: center;
+}
+
+.formulario-actividad input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font: inherit;
+}
+
+.acciones-formulario {
+    display: flex;
+    grid-column: 2;
+    gap: 8px;
+}
+
+@media (max-width: 520px) {
+    .formulario-actividad {
+        grid-template-columns: 1fr;
+    }
+
+    .acciones-formulario {
+        grid-column: 1;
+    }
+}

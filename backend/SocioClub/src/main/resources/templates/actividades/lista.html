@@ -28,6 +28,7 @@
                     <th>Edades</th>
                     <th>Cupo</th>
                     <th>Cuota mensual</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,9 @@
                     <td th:text="|${actividad.edadMinima} a ${actividad.edadMaxima}|">6 a 12</td>
                     <td th:text="${actividad.cupoMaximo}">40</td>
                     <td class="cuota" th:text="|$${#numbers.formatDecimal(actividad.cuotaMensual, 1, 'POINT', 0, 'COMMA')}|">$ 18.000</td>
+                    <td class="acciones">
+                        <a class="boton" th:href="@{/actividades/{id}/editar(id=${actividad.id})}">Editar</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
