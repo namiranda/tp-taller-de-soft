@@ -12,7 +12,10 @@
 
 <main>
     <section class="panel">
-        <h2>Actividades</h2>
+        <div class="titulo-panel">
+            <h2>Actividades</h2>
+            <a class="boton" th:href="@{/actividades/alta}">Nueva actividad</a>
+        </div>
 
         <p th:if="${#lists.isEmpty(actividades)}">No hay actividades cargadas.</p>
 

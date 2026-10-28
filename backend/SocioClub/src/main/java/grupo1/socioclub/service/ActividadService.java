@@ -19,4 +19,8 @@ public class ActividadService {
     public List<Actividad> listarTodas() {
         return actividadRepository.findAll(Sort.by("nombre"));
     }
+
+    public Actividad guardar(Actividad actividad) {
+        return actividadRepository.save(actividad);
+    }
 }
