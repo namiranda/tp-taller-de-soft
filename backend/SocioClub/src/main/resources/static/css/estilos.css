@@ -72,3 +72,40 @@ th {
     text-align: center;
     color: #666;
 }
+
+.acciones {
+    white-space: nowrap;
+}
+
+.formulario-baja {
+    display: inline;
+    padding: 0;
+    background: none;
+}
+
+.boton-peligro {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 4px;
+    background: #b42318;
+    color: #fff;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.alerta {
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border-radius: 4px;
+}
+
+.alerta-exito {
+    background: #d1fadf;
+    color: #05603a;
+}
+
+.alerta-error {
+    background: #fee4e2;
+    color: #b42318;
+}
