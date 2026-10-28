@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nueva actividad · SocioClub</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+<header th:replace="~{fragmentos/layout :: encabezado}"></header>
+
+<main>
+    <section class="panel formulario-panel">
+        <h2>Nueva actividad</h2>
+
+        <form th:action="@{/actividades}" th:object="${actividad}" method="post">
+            <p class="error" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></p>
+            <div class="campo"><label>Nombre<input th:field="*{nombre}" required maxlength="100"></label><small class="error" th:errors="*{nombre}"></small></div>
+            <div class="campo"><label>Disciplina<input th:field="*{disciplina}" required maxlength="100"></label><small class="error" th:errors="*{disciplina}"></small></div>
+            <div class="campo"><label>Profesor/a<input th:field="*{profesor}" required maxlength="100"></label><small class="error" th:errors="*{profesor}"></small></div>
+            <div class="campo"><label>Días<input th:field="*{dias}" required maxlength="100" placeholder="Lun y Mié"></label><small class="error" th:errors="*{dias}"></small></div>
+            <div class="campo"><label>Horario<input th:field="*{horario}" type="time" required></label><small class="error" th:errors="*{horario}"></small></div>
+            <div class="campo"><label>Edad mínima<input th:field="*{edadMinima}" type="number" min="0" max="120" required></label><small class="error" th:errors="*{edadMinima}"></small></div>
+            <div class="campo"><label>Edad máxima<input th:field="*{edadMaxima}" type="number" min="0" max="120" required></label><small class="error" th:errors="*{edadMaxima}"></small></div>
+            <div class="campo"><label>Cupo máximo<input th:field="*{cupoMaximo}" type="number" min="1" max="500" required></label><small class="error" th:errors="*{cupoMaximo}"></small></div>
+            <div class="campo"><label>Cuota mensual<input th:field="*{cuotaMensual}" type="number" min="0.01" step="0.01" required></label><small class="error" th:errors="*{cuotaMensual}"></small></div>
+
+            <div class="acciones-formulario">
+                <a th:href="@{/actividades}">Cancelar</a>
+                <button type="submit">Guardar actividad</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: pie}"></footer>
+
+</body>
+</html>

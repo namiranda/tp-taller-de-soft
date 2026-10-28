@@ -21,6 +21,10 @@ public class ActividadService {
         return actividadRepository.findAll(Sort.by("nombre"));
     }
 
+    public Actividad guardar(Actividad actividad) {
+        return actividadRepository.save(actividad);
+    }
+
     public Optional<Actividad> buscarPorId(Long id) {
         return actividadRepository.findById(id);
     }
