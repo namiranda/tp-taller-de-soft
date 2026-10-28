@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="encabezado" class="encabezado">
+    <h1>SocioClub<span>Secretaría</span></h1>
+    <nav>
+        <a th:href="@{/actividades}">Actividades</a>
+    </nav>
+</header>
+
+<footer th:fragment="pie" class="pie">
+    <p>Club Social y Deportivo Los Algarrobos · Córdoba</p>
+</footer>
+
+</body>
+</html>
