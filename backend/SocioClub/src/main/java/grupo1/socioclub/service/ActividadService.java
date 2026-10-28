@@ -22,6 +22,29 @@ public class ActividadService {
         return actividadRepository.findAll(Sort.by("nombre"));
     }
 
+    public Actividad guardar(Actividad actividad) {
+        return actividadRepository.save(actividad);
+    }
+
+    public Optional<Actividad> buscarPorId(Long id) {
+        return actividadRepository.findById(id);
+    }
+
+    public Optional<Actividad> actualizar(Long id, Actividad datos) {
+        return actividadRepository.findById(id).map(actividad -> {
+            actividad.setNombre(datos.getNombre());
+            actividad.setDisciplina(datos.getDisciplina());
+            actividad.setProfesor(datos.getProfesor());
+            actividad.setDias(datos.getDias());
+            actividad.setHorario(datos.getHorario());
+            actividad.setEdadMinima(datos.getEdadMinima());
+            actividad.setEdadMaxima(datos.getEdadMaxima());
+            actividad.setCupoMaximo(datos.getCupoMaximo());
+            actividad.setCuotaMensual(datos.getCuotaMensual());
+            return actividadRepository.save(actividad);
+        });
+    }
+
     public Optional<Actividad> eliminar(Long id) {
         return actividadRepository.findById(id).map(actividad -> {
             if (actividadRepository.contarInscripcionesActivas(id) > 0) {

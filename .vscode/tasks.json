@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Iniciar SocioClub (solicitar contraseña DB)",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'backend\\SocioClub'; $secure = Read-Host 'Contraseña de la base de datos' -AsSecureString; $env:SPRING_DATASOURCE_PASSWORD = (New-Object System.Net.NetworkCredential('', $secure)).Password; .\\mvnw.cmd spring-boot:run; Remove-Item Env:SPRING_DATASOURCE_PASSWORD"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

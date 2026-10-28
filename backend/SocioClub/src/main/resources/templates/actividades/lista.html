@@ -12,7 +12,10 @@
 
 <main>
     <section class="panel">
-        <h2>Actividades</h2>
+        <div class="titulo-panel">
+            <h2>Actividades</h2>
+            <a class="boton" th:href="@{/actividades/alta}">Nueva actividad</a>
+        </div>
 
         <p class="alerta alerta-exito" th:if="${mensaje}" th:text="${mensaje}">Actividad eliminada correctamente</p>
         <p class="alerta alerta-error" th:if="${error}" th:text="${error}">Mensaje de error</p>
@@ -45,6 +48,7 @@
                     <td th:text="${actividad.cupoMaximo}">40</td>
                     <td class="cuota" th:text="|$${#numbers.formatDecimal(actividad.cuotaMensual, 1, 'POINT', 0, 'COMMA')}|">$ 18.000</td>
                     <td class="acciones">
+                        <a class="boton" th:href="@{/actividades/{id}/editar(id=${actividad.id})}">Editar</a>
                         <form class="formulario-baja" method="post"
                               th:action="@{/actividades/{id}/eliminar(id=${actividad.id})}"
                               onsubmit="return confirm('¿Seguro que querés eliminar esta actividad?')">
