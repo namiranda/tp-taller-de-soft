@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
@@ -14,6 +15,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "actividad")
@@ -65,6 +68,10 @@ public class Actividad {
     @NotNull(message = "La cuota mensual es obligatoria")
     @DecimalMin(value = "0.0", inclusive = false, message = "La cuota mensual debe ser mayor a 0")
     private BigDecimal cuotaMensual;
+
+    // Lado inverso de la relacion: la clave foranea esta en Inscripcion.actividad
+    @OneToMany(mappedBy = "actividad")
+    private List<Inscripcion> inscripciones = new ArrayList<>();
 
     public Actividad() {
     }
@@ -147,6 +154,14 @@ public class Actividad {
 
     public void setCuotaMensual(BigDecimal cuotaMensual) {
         this.cuotaMensual = cuotaMensual;
+    }
+
+    public List<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
     }
 
 }
