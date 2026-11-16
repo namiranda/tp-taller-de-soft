@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscripciones · SocioClub</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/layout :: encabezado}"></header>
+
+<main>
+    <section class="panel">
+        <div class="titulo-panel">
+            <h2>Inscripciones</h2>
+            <a class="boton" th:href="@{/inscripciones/alta}">Nueva inscripción</a>
+        </div>
+        <p class="alerta alerta-exito" th:if="${mensaje}" th:text="${mensaje}">Inscripción dada de baja correctamente</p>
+
+        <p th:if="${#lists.isEmpty(inscripciones)}">No hay inscripciones cargadas.</p>
+        <div class="contenedor-tabla" th:unless="${#lists.isEmpty(inscripciones)}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Socio</th>
+                    <th>Actividad</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="inscripcion : ${inscripciones}">
+                    <td th:text="|${inscripcion.socio.apellido}, ${inscripcion.socio.nombre}|">Apellido, Nombre</td>
+                    <td th:text="${inscripcion.actividad.nombre}">Fútbol infantil</td>
+                    <td th:text="${#temporals.format(inscripcion.fechaInscripcion, 'dd/MM/yyyy')}">26/10/2026</td>
+                    <td th:text="${inscripcion.estado}">ACTIVA</td>
+                    <td>
+                        <form th:if="${inscripcion.estado.name() == 'ACTIVA'}"
+                              th:action="@{/inscripciones/{id}/baja(id=${inscripcion.id})}" method="post">
+                            <button class="boton boton-peligro" type="submit">Dar de baja</button>
+                        </form>
+                        <span th:if="${inscripcion.estado.name() == 'BAJA'}">Sin acciones</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: pie}"></footer>
+</body>
+</html>

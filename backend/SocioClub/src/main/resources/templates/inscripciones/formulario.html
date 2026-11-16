@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nueva inscripción · SocioClub</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/layout :: encabezado}"></header>
+
+<main>
+    <section class="panel formulario-panel">
+        <h2>Nueva inscripción</h2>
+        <p class="alerta alerta-error" th:if="${error}" th:text="${error}">No se pudo completar la inscripción</p>
+
+        <form th:action="@{/inscripciones}" th:object="${formulario}" method="post">
+            <div class="campo">
+                <label for="socioId">Socio</label>
+                <select id="socioId" th:field="*{socioId}" required>
+                    <option value="">Seleccione un socio</option>
+                    <option th:each="socio : ${socios}" th:value="${socio.id}"
+                            th:text="|${socio.apellido}, ${socio.nombre} · ${socio.dni}|">Apellido, Nombre</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="actividadId">Actividad</label>
+                <select id="actividadId" th:field="*{actividadId}" required>
+                    <option value="">Seleccione una actividad</option>
+                    <option th:each="actividad : ${actividades}" th:value="${actividad.id}"
+                            th:text="|${actividad.nombre} · ${actividad.disciplina}|">Actividad</option>
+                </select>
+            </div>
+            <div class="acciones-formulario">
+                <a th:href="@{/inscripciones}">Cancelar</a>
+                <button type="submit">Inscribir</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: pie}"></footer>
+</body>
+</html>

@@ -22,6 +22,14 @@ public class ActividadService {
         return actividadRepository.findAll(Sort.by("nombre"));
     }
 
+    public List<Actividad> listarPorDisciplina(String disciplina) {
+        return actividadRepository.findByDisciplina(disciplina);
+    }
+
+    public long contarInscripcionesActivas(Long actividadId) {
+        return actividadRepository.contarInscripcionesActivas(actividadId);
+    }
+
     public Actividad guardar(Actividad actividad) {
         return actividadRepository.save(actividad);
     }

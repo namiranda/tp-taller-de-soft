@@ -1,0 +1,264 @@
+{
+  "info": {
+    "_postman_id": "dbb8433d-b8bd-43f3-9140-6a041cbc19c0",
+    "name": "SocioClub API - Anexo A",
+    "description": "Colección para el backend local. Las pruebas de errores asumen los IDs de database/socioclub_completo.sql y se deben ejecutar en orden con Runner. Los casos de capacidad y máximo realizan cambios temporales y los revierten al finalizar sus pasos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080", "type": "string" },
+    { "key": "actividadCreadaId", "value": "", "type": "string" },
+    { "key": "inscripcionCreadaId", "value": "", "type": "string" },
+    { "key": "inscripcionMaxVolleyId", "value": "", "type": "string" },
+    { "key": "inscripcionMaxBasketId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Actividades",
+      "item": [
+        {
+          "name": "Listar actividades con cupo disponible",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/actividades"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });", "pm.test('Incluye cupoDisponible', function () { pm.expect(pm.response.json()[0]).to.have.property('cupoDisponible'); });"] } }]
+        },
+        {
+          "name": "Filtrar actividades por disciplina",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/actividades?disciplina=Fútbol"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });", "pm.test('Todas son de Fútbol', function () { pm.response.json().forEach(function (actividad) { pm.expect(actividad.disciplina).to.eql('Fútbol'); }); });"] } }]
+        },
+        {
+          "name": "Detalle de actividad existente",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/actividades/1" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "Detalle de actividad inexistente",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/actividades/999999" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        },
+        {
+          "name": "Modificar actividad inexistente",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"No existe\",\n  \"disciplina\": \"Prueba\",\n  \"profesor\": \"Profesor\",\n  \"dias\": \"Lun\",\n  \"horario\": \"10:00:00\",\n  \"edadMinima\": 10,\n  \"edadMaxima\": 50,\n  \"cupoMaximo\": 10,\n  \"cuotaMensual\": 1000.00\n}" },
+            "url": "{{baseUrl}}/api/actividades/999999"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        },
+        {
+          "name": "Crear actividad",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Actividad Postman\",\n  \"disciplina\": \"Prueba\",\n  \"profesor\": \"Profesor Postman\",\n  \"dias\": \"Lun\",\n  \"horario\": \"10:00:00\",\n  \"edadMinima\": 10,\n  \"edadMaxima\": 50,\n  \"cupoMaximo\": 10,\n  \"cuotaMensual\": 1000.00\n}" },
+            "url": "{{baseUrl}}/api/actividades"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('201 Created', function () { pm.response.to.have.status(201); });", "pm.collectionVariables.set('actividadCreadaId', pm.response.json().id);"] } }]
+        },
+        {
+          "name": "Modificar actividad creada",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Actividad Postman modificada\",\n  \"disciplina\": \"Prueba\",\n  \"profesor\": \"Profesor Postman\",\n  \"dias\": \"Lun y Mié\",\n  \"horario\": \"10:30:00\",\n  \"edadMinima\": 10,\n  \"edadMaxima\": 50,\n  \"cupoMaximo\": 12,\n  \"cuotaMensual\": 1200.00\n}" },
+            "url": "{{baseUrl}}/api/actividades/{{actividadCreadaId}}"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "Eliminar actividad creada",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/actividades/{{actividadCreadaId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('204 No Content', function () { pm.response.to.have.status(204); });"] } }]
+        },
+        {
+          "name": "Eliminar actividad inexistente",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/actividades/999999" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        },
+        {
+          "name": "Eliminar actividad con inscripciones activas",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/actividades/6" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('409 Conflict', function () { pm.response.to.have.status(409); });", "pm.test('El error explica el conflicto', function () { pm.expect(pm.response.json().mensaje).to.include('inscriptos activos'); });"] } }]
+        }
+      ]
+    },
+    {
+      "name": "Socios",
+      "item": [
+        {
+          "name": "Buscar socio por DNI existente",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/socios/dni/45123401" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });", "pm.test('DNI coincide', function () { pm.expect(pm.response.json().dni).to.eql('45123401'); });"] } }]
+        },
+        {
+          "name": "Buscar socio por DNI inexistente",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/socios/dni/00000000" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        },
+        {
+          "name": "Inscripciones activas del socio",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/socios/1/inscripciones" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });", "pm.test('Todas están activas', function () { pm.response.json().forEach(function (inscripcion) { pm.expect(inscripcion.estado).to.eql('ACTIVA'); }); });"] } }]
+        },
+        {
+          "name": "Inscripciones de socio inexistente",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/socios/999999/inscripciones" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        }
+      ]
+    },
+    {
+      "name": "Inscripciones",
+      "item": [
+        {
+          "name": "Inscribir socio habilitado",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 9,\n  \"actividadId\": 2\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('201 Created', function () { pm.response.to.have.status(201); });", "pm.collectionVariables.set('inscripcionCreadaId', pm.response.json().id);"] } }]
+        },
+        {
+          "name": "Baja lógica de la inscripción creada",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/inscripciones/{{inscripcionCreadaId}}/baja"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });", "pm.test('Estado BAJA', function () { pm.expect(pm.response.json().estado).to.eql('BAJA'); });"] } }]
+        },
+        {
+          "name": "Baja de inscripción inexistente",
+          "request": { "method": "PUT", "header": [], "url": "{{baseUrl}}/api/inscripciones/999999/baja" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        },
+        {
+          "name": "Inscripción con socio inexistente",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 999999,\n  \"actividadId\": 1\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('404 Not Found', function () { pm.response.to.have.status(404); });"] } }]
+        }
+      ]
+    },
+    {
+      "name": "Errores de reglas de negocio (RN1-RN5)",
+      "item": [
+        {
+          "name": "RN2 - Socio duplicado en actividad",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 1,\n  \"actividadId\": 6\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('409 Conflict', function () { pm.response.to.have.status(409); });", "pm.test('Mensaje RN2', function () { pm.expect(pm.response.json().mensaje).to.eql('El socio ya está inscripto en esta actividad'); });"] } }]
+        },
+        {
+          "name": "RN4 - Socio moroso",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 14,\n  \"actividadId\": 8\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('409 Conflict', function () { pm.response.to.have.status(409); });", "pm.test('Mensaje RN4', function () { pm.expect(pm.response.json().mensaje).to.eql('Debe regularizar su cuota en secretaría'); });"] } }]
+        },
+        {
+          "name": "RN3 - Edad fuera de rango",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 1,\n  \"actividadId\": 7\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('409 Conflict', function () { pm.response.to.have.status(409); });", "pm.test('El mensaje informa el rango', function () { pm.expect(pm.response.json().mensaje).to.include('entre 18 y 65 años'); });"] } }]
+        },
+        {
+          "name": "RN5 - Preparar tercera actividad (Vóley)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 4,\n  \"actividadId\": 2\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('201 Created', function () { pm.response.to.have.status(201); });", "pm.collectionVariables.set('inscripcionMaxVolleyId', pm.response.json().id);"] } }]
+        },
+        {
+          "name": "RN5 - Preparar tercera actividad (Básquet)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 4,\n  \"actividadId\": 3\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('201 Created', function () { pm.response.to.have.status(201); });", "pm.collectionVariables.set('inscripcionMaxBasketId', pm.response.json().id);"] } }]
+        },
+        {
+          "name": "RN5 - Rechazar cuarta actividad",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 4,\n  \"actividadId\": 4\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('409 Conflict', function () { pm.response.to.have.status(409); });", "pm.test('Mensaje RN5', function () { pm.expect(pm.response.json().mensaje).to.eql('Alcanzó el máximo de 3 actividades'); });"] } }]
+        },
+        {
+          "name": "RN5 - Limpiar Vóley de prueba",
+          "request": { "method": "PUT", "header": [], "url": "{{baseUrl}}/api/inscripciones/{{inscripcionMaxVolleyId}}/baja" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "RN5 - Limpiar Básquet de prueba",
+          "request": { "method": "PUT", "header": [], "url": "{{baseUrl}}/api/inscripciones/{{inscripcionMaxBasketId}}/baja" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "RN1 - Preparar cupo completo",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ajedrez\",\n  \"disciplina\": \"Ajedrez\",\n  \"profesor\": \"Raúl Giménez\",\n  \"dias\": \"Sáb\",\n  \"horario\": \"10:00:00\",\n  \"edadMinima\": 8,\n  \"edadMaxima\": 99,\n  \"cupoMaximo\": 15,\n  \"cuotaMensual\": 9000.00\n}" },
+            "url": "{{baseUrl}}/api/actividades/6"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });"] } }]
+        },
+        {
+          "name": "RN1 - Rechazar inscripción sin cupo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"socioId\": 10,\n  \"actividadId\": 6\n}" },
+            "url": "{{baseUrl}}/api/inscripciones"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('409 Conflict', function () { pm.response.to.have.status(409); });", "pm.test('Mensaje RN1', function () { pm.expect(pm.response.json().mensaje).to.eql('La actividad no tiene cupo disponible'); });"] } }]
+        },
+        {
+          "name": "RN1 - Restaurar cupo inicial",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ajedrez\",\n  \"disciplina\": \"Ajedrez\",\n  \"profesor\": \"Raúl Giménez\",\n  \"dias\": \"Sáb\",\n  \"horario\": \"10:00:00\",\n  \"edadMinima\": 8,\n  \"edadMaxima\": 99,\n  \"cupoMaximo\": 16,\n  \"cuotaMensual\": 9000.00\n}" },
+            "url": "{{baseUrl}}/api/actividades/6"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('200 OK', function () { pm.response.to.have.status(200); });"] } }]
+        }
+      ]
+    }
+  ]
+}

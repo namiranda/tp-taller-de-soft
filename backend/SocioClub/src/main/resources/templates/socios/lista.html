@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Socios · SocioClub</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header th:replace="~{fragmentos/layout :: encabezado}"></header>
+
+<main>
+    <section class="panel">
+        <div class="titulo-panel">
+            <h2>Socios</h2>
+            <a class="boton" th:href="@{/inscripciones/alta}">Nueva inscripción</a>
+        </div>
+
+        <form method="get" th:action="@{/socios}" class="formulario-busqueda">
+            <label for="apellido">Buscar por apellido</label>
+            <input id="apellido" name="apellido" type="search" th:value="${apellido}">
+            <button type="submit">Buscar</button>
+            <a th:href="@{/socios}">Limpiar</a>
+        </form>
+
+        <p th:if="${socios.empty}">No hay socios para mostrar.</p>
+        <div class="contenedor-tabla" th:unless="${socios.empty}">
+            <table>
+                <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Apellido y nombre</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Estado de cuota</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="socio : ${socios.content}">
+                    <td th:text="${socio.dni}">45123401</td>
+                    <td th:text="|${socio.apellido}, ${socio.nombre}|">Gómez, Lucas</td>
+                    <td th:text="${#temporals.format(socio.fechaNacimiento, 'dd/MM/yyyy')}">14/05/2012</td>
+                    <td th:text="${socio.estadoCuota}">AL_DIA</td>
+                    <td th:text="${socio.email}">socio@example.com</td>
+                    <td th:text="${socio.telefono}">3510000000</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav class="paginacion" th:if="${socios.totalPages > 1}" aria-label="Paginación">
+            <a th:if="${socios.hasPrevious()}"
+               th:href="@{/socios(page=${socios.number - 1},size=${socios.size},apellido=${apellido})}">Anterior</a>
+            <span th:text="|Página ${socios.number + 1} de ${socios.totalPages}|">Página 1 de 2</span>
+            <a th:if="${socios.hasNext()}"
+               th:href="@{/socios(page=${socios.number + 1},size=${socios.size},apellido=${apellido})}">Siguiente</a>
+        </nav>
+    </section>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: pie}"></footer>
+</body>
+</html>
