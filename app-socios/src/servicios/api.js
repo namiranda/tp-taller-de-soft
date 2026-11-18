@@ -1,9 +1,6 @@
 // Toda la comunicación con el backend está centralizada en este archivo (Axios).
 // Endpoints: Anexo A del enunciado (Parte C).
 //
-// Mientras la API no esté lista se puede trabajar con datos locales:
-//   REACT_APP_USAR_DATOS_LOCALES=true  (ver .env)
-//
 // Contrato JSON real del backend (rama Parte-B-y-C, ver backend/SocioClub/API.md):
 //   Actividad:   { id, nombre, disciplina, profesor, dias, horario, edadMinima,
 //                  edadMaxima, cupoMaximo, cuotaMensual, cupoDisponible }
@@ -13,9 +10,6 @@
 // Como la inscripcion viene "plana", la combinamos con la lista de actividades
 // para que los componentes reciban { id, estado, actividad: { ...Actividad } }.
 import axios from 'axios';
-import * as apiLocal from './apiLocal';
-
-const USAR_DATOS_LOCALES = process.env.REACT_APP_USAR_DATOS_LOCALES === 'true';
 
 const cliente = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8080/api',
@@ -49,19 +43,16 @@ async function pedir(promesa) {
 
 // GET /api/socios/dni/{dni}
 export function buscarSocioPorDni(dni) {
-  if (USAR_DATOS_LOCALES) return apiLocal.buscarSocioPorDni(dni);
   return pedir(cliente.get(`/socios/dni/${dni}`));
 }
 
 // GET /api/actividades?disciplina=Fútbol
 export function obtenerActividades(disciplina) {
-  if (USAR_DATOS_LOCALES) return apiLocal.obtenerActividades(disciplina);
   return pedir(cliente.get('/actividades', { params: disciplina ? { disciplina } : {} }));
 }
 
 // GET /api/actividades/{id}
 export function obtenerActividad(id) {
-  if (USAR_DATOS_LOCALES) return apiLocal.obtenerActividad(id);
   return pedir(cliente.get(`/actividades/${id}`));
 }
 
@@ -80,18 +71,15 @@ async function pedirInscripcionesConActividad(socioId) {
 
 // GET /api/socios/{id}/inscripciones  (solo ACTIVAS)
 export function obtenerInscripcionesDeSocio(socioId) {
-  if (USAR_DATOS_LOCALES) return apiLocal.obtenerInscripcionesDeSocio(socioId);
   return pedirInscripcionesConActividad(socioId);
 }
 
 // POST /api/inscripciones  { socioId, actividadId }  -> 201 / 404 / 409
 export function inscribirSocio(socioId, actividadId) {
-  if (USAR_DATOS_LOCALES) return apiLocal.inscribirSocio(socioId, actividadId);
   return pedir(cliente.post('/inscripciones', { socioId, actividadId }));
 }
 
 // PUT /api/inscripciones/{id}/baja  (baja lógica)
 export function darDeBaja(inscripcionId) {
-  if (USAR_DATOS_LOCALES) return apiLocal.darDeBaja(inscripcionId);
   return pedir(cliente.put(`/inscripciones/${inscripcionId}/baja`));
 }

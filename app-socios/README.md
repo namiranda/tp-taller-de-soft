@@ -12,14 +12,9 @@ npm start
 
 Se abre en http://localhost:3000.
 
-## Datos locales o API
+## Conexión con el backend
 
-En `.env`:
-
-- `REACT_APP_USAR_DATOS_LOCALES=true`: usa datos en memoria (`src/servicios/apiLocal.js`), sin backend. Aplica RN1 a RN5.
-- `REACT_APP_USAR_DATOS_LOCALES=false`: usa la API REST (`REACT_APP_API_URL`, por defecto `http://localhost:8080/api`) con Axios. Requiere la Parte C y CORS para `localhost:3000`.
-
-Reiniciar `npm start` después de cambiar `.env`.
+La app consume la API REST con Axios (`REACT_APP_API_URL` en `.env`, por defecto `http://localhost:8080/api`). El backend debe estar levantado y permitir CORS para `localhost:3000`.
 
 ## DNI de prueba
 
