@@ -1,0 +1,53 @@
+.encabezado {
+  background: var(--verde);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.encabezado__marca {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.encabezado__marca span {
+  font-weight: normal;
+  font-size: 0.95rem;
+}
+
+.encabezado__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.encabezado__nav a {
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+
+.encabezado__nav a.active {
+  border-bottom: 2px solid #fff;
+}
+
+.encabezado__saludo {
+  font-size: 0.9rem;
+}
+
+.encabezado .boton--secundario {
+  color: #fff;
+  border-color: #fff;
+  padding: 0.3rem 0.8rem;
+}
+
+.encabezado .boton--secundario:hover:not(:disabled) {
+  background: var(--verde-oscuro);
+}
