@@ -1,0 +1,112 @@
+.filtro {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filtro select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tarjeta {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta h2 {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-size: 1.2rem;
+}
+
+.tarjeta__disciplina {
+  margin: 0 0 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.tarjeta__datos {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+  flex: 1;
+}
+
+.tarjeta__acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tarjeta__acciones .boton {
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+/* Clase que se aplica dinámicamente cuando la actividad no tiene cupo */
+.tarjeta--sin-cupo {
+  background: var(--gris-claro);
+  color: #777;
+}
+
+.tarjeta--sin-cupo h2 {
+  color: #777;
+}
+
+.etiqueta {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--verde-oscuro);
+  margin: 0 0 0.75rem;
+}
+
+.etiqueta--sin-cupo {
+  color: var(--error);
+}
+
+/* Detalle de actividad */
+.detalle {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.detalle dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1rem;
+}
+
+.detalle dt {
+  font-weight: bold;
+}
+
+.detalle dd {
+  margin: 0;
+}
+
+.detalle__acciones {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.detalle__acciones a {
+  text-decoration: none;
+}
