@@ -9,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,15 +27,21 @@ public class Socio {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 8)
+    @NotBlank(message = "El DNI es obligatorio")
+    @Size(min = 7, max = 8, message = "El DNI debe tener entre 7 y 8 caracteres")
     private String dni;
 
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "El apellido es obligatorio")
     private String apellido;
 
     @Column(name = "fecha_nacimiento", nullable = false)
+    @NotNull(message = "La fecha de nacimiento es obligatoria")
+    @Past(message = "La fecha de nacimiento debe ser anterior a hoy")
     private LocalDate fechaNacimiento;
 
     @Column(length = 150)
@@ -42,6 +52,7 @@ public class Socio {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_cuota", nullable = false)
+    @NotNull(message = "El estado de cuota es obligatorio")
     private EstadoCuota estadoCuota;
 
     // Lado inverso de la relacion: la clave foranea esta en Inscripcion.socio

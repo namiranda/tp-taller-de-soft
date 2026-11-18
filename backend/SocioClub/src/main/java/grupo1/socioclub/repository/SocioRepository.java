@@ -11,5 +11,11 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     Page<Socio> findByApellidoContainingIgnoreCase(String apellido, Pageable pageable);
 
+    java.util.List<Socio> findAllByOrderByApellidoAsc();
+
     Optional<Socio> findByDni(String dni);
+
+    boolean existsByDni(String dni);
+
+    boolean existsByDniAndIdNot(String dni, Long id);
 }

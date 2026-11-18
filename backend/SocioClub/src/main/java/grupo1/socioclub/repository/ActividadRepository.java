@@ -12,6 +12,8 @@ public interface ActividadRepository extends JpaRepository<Actividad, Long> {
     // Metodo derivado: SELECT ... FROM actividad WHERE disciplina = ?
     List<Actividad> findByDisciplina(String disciplina);
 
+    List<Actividad> findAllByOrderByNombreAsc();
+
     @Query("SELECT COUNT(i) FROM Inscripcion i "
             + "WHERE i.actividad.id = :actividadId "
             + "AND i.estado = grupo1.socioclub.model.EstadoInscripcion.ACTIVA")
