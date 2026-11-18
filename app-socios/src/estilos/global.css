@@ -1,13 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@700;900&display=swap');
+
+/* Paleta compartida con el sitio público y el sistema de secretaría */
 :root {
-  --verde: #2e7d32;
-  --verde-oscuro: #1b5e20;
-  --verde-claro: #e8f5e9;
-  --gris: #9e9e9e;
-  --gris-claro: #f1f1f1;
+  --marino: #081b30;
+  --acento: #00d4aa;
+  --verde: #087f5b;
+  --verde-oscuro: #065f46;
+  --verde-claro: #e6f7f1;
+  --gris: #9aa5b1;
+  --gris-claro: #eef1f4;
   --texto: #222;
-  --error: #c62828;
-  --error-fondo: #fdecea;
-  --borde: #d9d9d9;
+  --error: #b42318;
+  --error-fondo: #fee4e2;
+  --borde: #e5edf5;
+  --sombra: 0 12px 35px rgba(16, 42, 67, 0.07);
 }
 
 * {
@@ -16,10 +22,15 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  font-family: 'DM Sans', Arial, sans-serif;
   color: var(--texto);
-  background: #fafafa;
+  background: #f5f8fc;
   line-height: 1.5;
+}
+
+h1,
+h2 {
+  font-family: 'Outfit', Arial, sans-serif;
 }
 
 .app {
@@ -31,23 +42,26 @@ body {
 .contenido {
   flex: 1;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 24px 16px;
 }
 
 h1 {
-  color: var(--verde-oscuro);
+  color: var(--marino);
   margin-top: 0;
 }
 
 .boton {
+  display: inline-block;
   background: var(--verde);
   color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.1rem;
-  font-size: 1rem;
+  border-radius: 4px;
+  padding: 9px 14px;
+  font: inherit;
+  font-weight: bold;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -61,13 +75,11 @@ h1 {
 }
 
 .boton--secundario {
-  background: transparent;
-  color: var(--verde-oscuro);
-  border: 1px solid var(--verde);
+  background: #5f6b76;
 }
 
 .boton--secundario:hover:not(:disabled) {
-  background: var(--verde-claro);
+  background: #46515b;
 }
 
 .boton--peligro {
@@ -75,25 +87,23 @@ h1 {
 }
 
 .boton--peligro:hover:not(:disabled) {
-  background: #8e0000;
+  background: #8a1a10;
 }
 
 .mensaje {
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border-radius: 4px;
   margin: 1rem 0;
 }
 
 .mensaje--error {
   background: var(--error-fondo);
   color: var(--error);
-  border: 1px solid var(--error);
 }
 
 .mensaje--exito {
-  background: var(--verde-claro);
-  color: var(--verde-oscuro);
-  border: 1px solid var(--verde);
+  background: #d1fadf;
+  color: #05603a;
 }
 
 .mensaje--info {

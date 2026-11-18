@@ -11,6 +11,7 @@
   background: #fff;
   border: 1px solid var(--borde);
   border-radius: 8px;
+  box-shadow: var(--sombra);
   padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -21,8 +22,9 @@
 
 .resumen-cuota {
   background: var(--verde-claro);
-  border: 1px solid var(--verde);
+  border: 1px solid var(--acento);
   border-radius: 8px;
+  box-shadow: var(--sombra);
   padding: 1rem;
 }
 

@@ -14,7 +14,7 @@ function Encabezado() {
   return (
     <header className="encabezado">
       <Link to={socio ? '/actividades' : '/'} className="encabezado__marca">
-        Mi Club <span>· Los Algarrobos</span>
+        SocioClub<span>Mi Club</span>
       </Link>
 
       {socio && (

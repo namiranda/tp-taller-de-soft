@@ -5,6 +5,7 @@
   padding: 1.5rem;
   border: 1px solid var(--borde);
   border-radius: 8px;
+  box-shadow: var(--sombra);
 }
 
 .ingreso form {

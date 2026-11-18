@@ -1,8 +1,7 @@
 .pie {
-  background: var(--verde-oscuro);
-  color: #fff;
+  padding: 12px 24px;
   text-align: center;
-  padding: 1rem;
+  color: #666;
   font-size: 0.9rem;
 }
 

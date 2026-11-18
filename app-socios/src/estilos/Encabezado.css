@@ -1,7 +1,7 @@
 .encabezado {
-  background: var(--verde);
+  background: var(--marino);
   color: #fff;
-  padding: 0.75rem 1rem;
+  padding: 12px 24px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -9,16 +9,27 @@
   gap: 0.5rem;
 }
 
+/* Logo: mismo que el sitio público y el sistema de secretaría */
 .encabezado__marca {
   color: #fff;
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -1px;
   text-decoration: none;
 }
 
+.encabezado__marca::first-letter {
+  color: var(--acento);
+}
+
 .encabezado__marca span {
-  font-weight: normal;
+  font-family: 'DM Sans', Arial, sans-serif;
   font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #c5dce9;
+  margin-left: 8px;
 }
 
 .encabezado__nav {
@@ -30,24 +41,22 @@
 
 .encabezado__nav a {
   color: #fff;
+  font-weight: bold;
   text-decoration: none;
   padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
 }
 
+.encabezado__nav a:hover,
 .encabezado__nav a.active {
-  border-bottom: 2px solid #fff;
+  border-bottom-color: var(--acento);
 }
 
 .encabezado__saludo {
   font-size: 0.9rem;
+  color: #c5dce9;
 }
 
 .encabezado .boton--secundario {
-  color: #fff;
-  border-color: #fff;
   padding: 0.3rem 0.8rem;
-}
-
-.encabezado .boton--secundario:hover:not(:disabled) {
-  background: var(--verde-oscuro);
 }
