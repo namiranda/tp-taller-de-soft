@@ -4,12 +4,14 @@
 // Mientras la API no esté lista se puede trabajar con datos locales:
 //   REACT_APP_USAR_DATOS_LOCALES=true  (ver .env)
 //
-// Contrato JSON que esperamos del backend (a acordar con la Parte C):
+// Contrato JSON real del backend (rama Parte-B-y-C, ver backend/SocioClub/API.md):
 //   Actividad:   { id, nombre, disciplina, profesor, dias, horario, edadMinima,
 //                  edadMaxima, cupoMaximo, cuotaMensual, cupoDisponible }
-//   Socio:       { id, dni, nombre, apellido, fechaNacimiento, estadoCuota }
-//   Inscripcion: { id, fechaInscripcion, estado, actividad: { ...Actividad } }
-//   Error 409:   { error: "mensaje de la regla", regla: "RN1" }
+//   Socio:       { id, dni, nombre, apellido, fechaNacimiento, estadoCuota, ... }
+//   Inscripcion: { id, socioId, socio, actividadId, actividad (nombre), fechaInscripcion, estado }
+//   Error 404/409: { mensaje: "mensaje de la regla" }
+// Como la inscripcion viene "plana", la combinamos con la lista de actividades
+// para que los componentes reciban { id, estado, actividad: { ...Actividad } }.
 import axios from 'axios';
 import * as apiLocal from './apiLocal';
 
@@ -26,7 +28,7 @@ function traducirError(error) {
   if (error.response) {
     const { status, data } = error.response;
     const mensaje =
-      (data && data.error) ||
+      (data && (data.mensaje || data.error)) ||
       (status === 404 ? 'No se encontró lo que buscabas' : 'Ocurrió un error en el servidor');
     const traducido = new Error(mensaje);
     traducido.status = status;
@@ -63,10 +65,23 @@ export function obtenerActividad(id) {
   return pedir(cliente.get(`/actividades/${id}`));
 }
 
+async function pedirInscripcionesConActividad(socioId) {
+  const [inscripciones, actividades] = await Promise.all([
+    pedir(cliente.get(`/socios/${socioId}/inscripciones`)),
+    pedir(cliente.get('/actividades')),
+  ]);
+  return inscripciones.map((inscripcion) => ({
+    id: inscripcion.id,
+    fechaInscripcion: inscripcion.fechaInscripcion,
+    estado: inscripcion.estado,
+    actividad: actividades.find((a) => a.id === inscripcion.actividadId),
+  }));
+}
+
 // GET /api/socios/{id}/inscripciones  (solo ACTIVAS)
 export function obtenerInscripcionesDeSocio(socioId) {
   if (USAR_DATOS_LOCALES) return apiLocal.obtenerInscripcionesDeSocio(socioId);
-  return pedir(cliente.get(`/socios/${socioId}/inscripciones`));
+  return pedirInscripcionesConActividad(socioId);
 }
 
 // POST /api/inscripciones  { socioId, actividadId }  -> 201 / 404 / 409
