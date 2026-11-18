@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { formatearHorario, formatearPesos } from '../utils/formato';
 import '../estilos/Actividades.css';
 
-function TarjetaActividad({ actividad, onInscribirme }) {
+function TarjetaActividad({ actividad, onInscribirme = () => {} }) {
   const sinCupo = actividad.cupoDisponible <= 0;
 
   // Clase dinámica: la tarjeta se ve en gris cuando no hay lugar.
@@ -66,8 +66,5 @@ TarjetaActividad.propTypes = {
   onInscribirme: PropTypes.func,
 };
 
-TarjetaActividad.defaultProps = {
-  onInscribirme: () => {},
-};
 
 export default TarjetaActividad;
