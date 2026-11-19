@@ -228,3 +228,9 @@ th {
         grid-column: 1;
     }
 }
+
+.acciones-titulo {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}

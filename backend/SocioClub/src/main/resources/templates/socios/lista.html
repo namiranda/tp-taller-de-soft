@@ -13,8 +13,13 @@
     <section class="panel">
         <div class="titulo-panel">
             <h2>Socios</h2>
-            <a class="boton" th:href="@{/inscripciones/alta}">Nueva inscripción</a>
+            <div class="acciones-titulo">
+                <a class="boton" th:href="@{/socios/alta}">Nuevo socio</a>
+                <a class="boton" th:href="@{/inscripciones/alta}">Nueva inscripción</a>
+            </div>
         </div>
+
+        <p class="alerta alerta-exito" th:if="${mensaje}" th:text="${mensaje}">Socio creado correctamente</p>
 
         <form method="get" th:action="@{/socios}" class="formulario-busqueda">
             <label for="apellido">Buscar por apellido</label>
@@ -34,6 +39,7 @@
                     <th>Estado de cuota</th>
                     <th>Email</th>
                     <th>Teléfono</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,6 +50,7 @@
                     <td th:text="${socio.estadoCuota}">AL_DIA</td>
                     <td th:text="${socio.email}">socio@example.com</td>
                     <td th:text="${socio.telefono}">3510000000</td>
+                    <td class="acciones"><a class="boton" th:href="@{/socios/{id}/editar(id=${socio.id})}">Editar</a></td>
                 </tr>
                 </tbody>
             </table>
